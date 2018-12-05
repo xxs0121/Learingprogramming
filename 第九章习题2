@@ -1,0 +1,47 @@
+#include<stdio.h>
+
+struct Date
+{
+    int year;
+    int month;
+    int day;
+};
+
+int count(struct Date *p)
+{
+    int i,sum=0;
+    if((p->year)%4==0)
+    {
+        int m[12]={31,29,31,30,31,30,31,31,30,31,30,31};
+        for(i=0;i<p->month-1;i++)
+        {
+            sum=sum+m[i];
+        }
+        sum=sum+p->day;
+    }
+    else if((p->year)%4!=0)
+    {
+        int m[12]={31,28,31,30,31,30,31,31,30,31,30,31};
+        for(i=0;i<p->month-1;i++)
+        {
+            sum=sum+m[i];
+        }
+        sum=sum+p->day;
+    }
+    return sum;
+}
+
+int main()
+{
+    struct Date d;
+    struct Date *p;
+    p=&d;
+    int count(struct Date *p);
+    int n;
+
+    printf("输入日期 : \n");
+    scanf("%d.%d.%d",&d.year,&d.month,&d.day);
+    n=count(p);
+    printf("\n%d年%d月%d日是本年第%d天。\n",d.year,d.month,d.day,n);
+    return 0;
+}

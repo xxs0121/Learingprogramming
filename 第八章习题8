@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	char str[100];
+	char *check;
+	int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0, sum5 = 0, i;
+
+	printf("Enter a string : ");
+	gets_s(str, 100);
+	check = str;
+	for (i = 0; i < 100; i++,check++)
+	{
+		if (*check >= 65 && *check <= 90)
+			sum1++;
+		else if (*check >= 97 && *check <= 122)
+			sum2++;
+		else if (*check == 32)
+			sum3++;
+		else if (*check >= 48 && *check <= 57)
+			sum4++;
+		else if (*check == '\0')
+			break;
+		else
+			sum5++;
+	}
+	printf("There are %d uppercase letters , %d lowercase letters , %d spaces , %d numbers and %d other characters in the string . \n", sum1, sum2, sum3, sum4, sum5);
+	return 0;
+}

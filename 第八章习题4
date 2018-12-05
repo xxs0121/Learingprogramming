@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+	char nums1[11];                
+	char *p = nums1;
+	int m;
+	void sort(char *p, int m);
+
+
+	printf("Enter numbers :");
+	gets_s(nums1,11);
+	printf("Enter m :");
+	scanf_s("%d", &m);
+	printf("The original numbers are : %s\n", nums1);
+	sort(nums1, m);
+	return 0;
+}
+
+void sort(char *p, int m)
+{
+	char nums2[11];
+	int  k, h;
+
+
+	for (k = 10 - m, h = 0; k < 10, h < m; k++, h++)
+	{
+		nums2[h] = *(p + k);
+	}
+	for (h = m, k = 0; h < 10, k < 10 - m; h++, k++)
+	{
+		nums2[h] = *(p + k);
+	}
+	nums2[h] = '\0';
+	printf("The sorted numbers are : %s\n", nums2);
+}

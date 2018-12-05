@@ -1,0 +1,45 @@
+#include<stdio.h>
+int main()
+{
+	char *p1, *p2, s1[10], s2[10];
+	int result;
+	int strcmp(char *p1, char *p2);
+
+	p1 = s1;
+	p2 = s2;
+	printf("Enter s1 : ");
+	printf("\n");
+	gets_s(s1, 10);
+	printf("Enter s2 : ");
+	printf("\n");
+	gets_s(s2, 10);
+	result = strcmp(p1, p2);
+	printf("%d\n", result);
+	return 0;
+}
+
+int strcmp(char *p1, char *p2)
+{
+	int i, j, n=0, a;
+	for (j = 0; j < 10; j++)
+	{
+		if (*(p1 + j) != '\0' || *(p2 + j) != '\0')
+			n++;
+	}
+	for (i = 0; i < n; i++)
+	{
+		if (*(p1 + i) ==*(p2 + i))
+		{
+			if (i < n - 1)
+				continue;
+			else
+				a=0;
+		}
+		else if (*(p1 + i) != *(p2 + i))
+		{
+			a = *(p1 + i) - *(p2 + i);
+			break;
+		}
+	}
+	return a;
+}

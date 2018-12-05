@@ -1,0 +1,96 @@
+#include<stdio.h>
+int main()
+{
+	int numbers[5][5], a[25];
+	int *p;
+	void sort(int matrix[5][5]);
+	int i, j, n, sum = 0;
+
+	p = a;
+	for (n = 0; n < 25; n++)
+	{
+		printf("( The amount of the numbers : %2.2d ) Please enter No.%2.2d number : ", sum, n + 1);
+		scanf_s("%d", p++);
+		sum++;
+	}
+	p = a;
+	for (i = 0; i < 5; i++)
+		for (j = 0; j < 5; j++)
+			numbers[i][j] = *(p++);
+	for (i = 0; i < 5; i++)
+	{
+		for (j = 0; j < 5; j++)
+		{
+			printf("%5.2d", numbers[i][j]);
+			if (j + 1 == 5)
+				printf("\n");
+		}
+	}
+	printf("\n");
+	sort(numbers);
+	system("pause");
+	return 0;
+}
+
+void sort(int matrix[5][5])
+{
+	int *max, *min1, *min2, *min3, *min4;
+	int i, j, temp;
+
+	max = &matrix[2][2];
+	min1 = &matrix[0][0];
+	min2 = &matrix[0][4];
+	min3 = &matrix[4][0];
+	min4 = &matrix[4][4];
+	for (i = 0; i < 5; i++)
+	{
+		for (j = 0; j < 5; j++)
+		{
+			if (matrix[i][j] < *min1)
+			{
+				temp = *min1;
+				*min1 = matrix[i][j];
+				matrix[i][j] = temp;
+			}
+			if (matrix[i][j] > *min1&&matrix[i][j] < *min2)
+			{
+				temp = *min2;
+				*min2 = matrix[i][j];
+				matrix[i][j] = temp;
+			}
+			if (matrix[i][j] > *min2&&matrix[i][j] < *min3)
+			{
+				temp = *min3;
+				*min3 = matrix[i][j];
+				matrix[i][j] = temp;
+			}
+			if (matrix[i][j] > *min3&&matrix[i][j] < *min4)
+			{
+				temp = *min4;
+				*min4 = matrix[i][j];
+				matrix[i][j] = temp;
+			}
+		}
+	}
+	for (i = 0; i < 5; i++)
+	{
+		for (j = 0; j < 5; j++)
+		{
+			if (matrix[i][j] > *max)
+			{
+				temp = *max;
+				*max = matrix[i][j];
+				matrix[i][j] = temp;
+			}
+		}
+	}
+	for (i = 0; i < 5; i++)
+	{
+		for (j = 0; j < 5; j++)
+		{
+			printf("%5.2d", matrix[i][j]);
+			if (j + 1 == 5)
+				printf("\n");
+		}
+	}
+}

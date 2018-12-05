@@ -1,0 +1,77 @@
+#include<stdio.h>
+int main()
+{
+	double array[3][5], aver1[3], aver2 , MAX;
+	int i;
+	double(*p)[5];
+
+	void enternumbers(double array[3][5]);
+	double averageofline(double(*p)[5]);
+	double averageofall(double(*p)[5]);
+	double max(double(*p)[5]);
+	void print(double[3], double, double);
+
+	enternumbers(array);
+	p = array;
+	for (i = 0; i < 3; i++)
+		aver1[i] = averageofline(p + i);
+	p = array;
+	aver2 = averageofall(p);
+	MAX = max(p);
+	print(aver1, aver2, MAX);
+	return 0;
+}
+
+void enternumbers(double array[3][5])
+{
+	int i, j;
+	printf("Enter 15 numbers : \n");
+	for (i = 0; i < 3; i++)
+		for (j = 0; j < 5; j++)
+			scanf_s("%lf", &array[i][j]);
+}
+
+double averageofline(double(*p)[5])
+{
+	int i;
+	double sum = 0;
+	for (i = 0; i < 5; i++)
+		sum = sum + *(*p + i);
+	return (sum / 5);
+}
+
+double averageofall(double(*p)[5])
+{
+	int i, j;
+	double sum = 0;
+	for (i = 0; i < 3; i++)
+		for (j = 0; j < 5; j++)
+			sum = sum + *(*(p + i) + j);
+	return (sum / 15);
+}
+
+double max(double(*p)[5])
+{
+	int i = 0, j = 0;
+	double Max = *(*(p + i) + j);
+	for (; i < 3; i++)
+		for (; j < 5; j++)
+			if (*(*(p + i) + j) > Max)
+				Max = *(*(p + i) + j);
+	return (Max);
+}
+
+void print(double aver1[3], double aver2, double MAX)
+{
+	int i;
+	printf("\nAverages of every line are : ");
+	for (i = 0; i < 3; i++)
+		printf(" %f ", aver1[i]);
+	printf("\n");
+	printf("Average of all numbers is : ");
+	printf("%f", aver2);
+	printf("\n");
+	printf("The biggest number is : ");
+	printf("%f", MAX);
+	printf("\n");
+}

@@ -1,0 +1,97 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define LEN sizeof(struct student)
+
+struct student
+{
+	char num[6];
+	char name[8];
+	char sex[2];
+	int age;
+	struct student *next;
+}stu[10];
+
+int main()
+{
+	struct student *p=NULL, *pt=NULL, *head=NULL;
+	int i, length, iage=0, flag = 1;
+	int find = 0;
+	while (flag == 1)
+	{
+		printf("input length of list(<10):");
+		scanf_s("%d", &length);
+		if (length < 10)
+			flag = 0;
+	}
+
+	//建立链表
+	for (i = 0; i < length; i++)
+	{
+		p = (struct student*)malloc(LEN);
+		if (i == 0)
+			head = pt = p;
+		else
+			pt->next = p;
+		pt = p;
+		printf("NO.:");
+		scanf_s("%s", p->num,6);
+		printf("name:");
+		scanf_s("%s", p->name,8);
+		printf("sex:");
+		scanf_s("%s", p->sex,2);
+		printf("age:");
+		scanf_s("%d", &p->age);
+	}
+	p->next = NULL;
+	p = head;
+	printf("\nNO.   name   sex   age\n");
+	while (p != NULL)
+	{
+		printf("%-4s%-8s%-6s%-6d\n", p->num, p->name, p->sex, p->age);
+		p = p->next;
+	}
+
+	//删除结点
+	printf("input age:");
+	scanf_s("%d", &iage);
+	pt = head;
+	p = pt;
+	if (pt->age == iage)          //头结点是待删结点
+	{
+		p = pt->next;             //p指向链表下一个结点
+		head = pt = p;            //头指针下移，删除头结点
+		find ++;                 //find置1
+	}
+	else                          //头结点不是待删结点
+		pt = pt->next;            //pt指向下一个结点，遍历寻找下一个待删结点
+	while (pt != NULL)            //pt指向非空
+	{
+		if (pt->age == iage)       //若pt当前结点为待删结点
+		{
+			p->next = pt->next;    //p跳过当前pt结点，指向下一个pt结点
+			find ++;
+		}
+		else                       //若pt当前结点不是待删结点
+			p = pt;                //p指向pt当前结点
+		pt = pt->next;         //pt指向下一个结点
+
+	}
+	if (find==length)
+		printf("no record left.\n");
+	else
+	{
+		printf("\nNO.  name  sex  age\n");
+		while (p != NULL)            //p非空，执行循环输出链表
+		{
+			printf("%-4s%-8s%-6s%-6d\n", p->num, p->name, p->sex, p->age);
+			p = p->next;
+		}
+	}
+	if (!find)                     
+		printf("not found %d.", iage);          
+	p = head;                     //p指向头结点
+	    
+
+	return 0;
+}
